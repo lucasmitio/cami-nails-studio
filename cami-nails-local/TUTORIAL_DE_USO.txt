@@ -54,3 +54,9 @@ Não mova a pasta após instalar o atalho. O atalho aponta para essa localizaç�
 12. GITHUB E ENTREGA
 Siga docs/GITHUB_PASSO_A_PASSO.txt. Publique apenas código e documentos. O .gitignore exclui instance, backups, .venv e arquivos privados. Revise a lista antes de enviar.
 Para vídeos e imagens acadêmicas, utilize cadastros fictícios. Registre feedback e resultados reais somente após a validação com o Studio.
+
+REVISÃO DO SISTEMA — 18/10/2026
+Ao editar um agendamento, confira o valor combinado exibido no formulário.
+Se outra aba salvar o mesmo agendamento, reabra o cadastro antes de editar novamente.
+A restauração bloqueia a operação se a porta do sistema estiver em uso.
+Após restaurar um backup, entre novamente com o login e a senha da data desse backup.

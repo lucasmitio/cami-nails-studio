@@ -35,6 +35,7 @@ def protect():
 def index():
     try: day=datetime.strptime(request.args.get('data',now().date().isoformat()),'%Y-%m-%d').date()
     except ValueError: day=now().date()
+    if not 2000<=day.year<=2100: day=now().date()
     mode=request.args.get('visao','semana')
     if mode=='ano':
         start=day.replace(month=1,day=1);end=start.replace(year=start.year+1);prev=day.replace(year=day.year-1,day=1);nxt=day.replace(year=day.year+1,day=1)
@@ -64,6 +65,11 @@ def edit(rid=None):
             status=v.get('status','Agendado');note=v.get('observacoes','').strip()
             if status not in STATUSES or len(note)>2000: raise ValueError('Confira a situação e as observações (até 2.000 caracteres).')
             conn=db();conn.execute('BEGIN IMMEDIATE')
+            if old:
+                current=conn.execute('SELECT * FROM agendamentos WHERE id=?',(rid,)).fetchone()
+                if not current or str(current['revisao'])!=v.get('revisao'):
+                    raise ValueError('Este agendamento foi atualizado em outra aba. Reabra o agendamento antes de salvar para não substituir as alterações recentes.')
+                old=current
             client=conn.execute('SELECT * FROM clientes WHERE id=?',(cid,)).fetchone();service=conn.execute('SELECT * FROM servicos WHERE id=?',(sid,)).fetchone()
             if not client or (not client['ativo'] and (not old or old['cliente_id']!=cid)): raise ValueError('Selecione uma cliente ativa.')
             if not service or (not service['ativo'] and (not old or old['servico_id']!=sid)): raise ValueError('Selecione um serviço ativo.')
@@ -83,7 +89,7 @@ def edit(rid=None):
             db().rollback();error=str(exc) if str(exc) and not str(exc).startswith(('invalid','Invalid')) else 'Selecione cliente, serviço e data válidos.'
     clients=db().execute('SELECT * FROM clientes WHERE ativo=1 OR id=? ORDER BY nome',(old['cliente_id'] if old else 0,)).fetchall()
     services=db().execute('SELECT * FROM servicos WHERE ativo=1 OR id=? ORDER BY nome',(old['servico_id'] if old else 0,)).fetchall()
-    return render_template('agenda_form.html',title='Editar agendamento' if old else 'Novo agendamento',v=v,clients=clients,services=services,statuses=STATUSES,error=error),422 if error else 200
+    return render_template('agenda_form.html',title='Editar agendamento' if old else 'Novo agendamento',v=v,clients=clients,services=services,statuses=STATUSES,error=error,saved=old),422 if error else 200
 
 def render_message(template,a):
     start=datetime.fromisoformat(a['inicio']);maintenance=start+timedelta(days=a['intervalo'])

@@ -1,4 +1,4 @@
-import tempfile, unittest, sqlite3
+import tempfile, unittest, sqlite3, re
 from pathlib import Path
 from app import create_app
 from werkzeug.security import generate_password_hash
@@ -11,6 +11,10 @@ class StudioTest(unittest.TestCase):
   self.client=self.app.test_client()
  def tearDown(self): self.tmp.cleanup()
  def post(self,path,data):
+  if path.startswith('/agenda/') and path.endswith('/editar') and 'revisao' not in data:
+   form=self.client.get(path).get_data(as_text=True)
+   match=re.search(r'name="revisao" value="(\d+)"',form)
+   if match: data['revisao']=match.group(1)
   self.client.get('/login')
   with self.client.session_transaction() as s: data['csrf']=s['csrf']
   return self.client.post(path,data=data,follow_redirects=True)
