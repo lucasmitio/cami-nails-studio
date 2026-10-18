@@ -1,0 +1,57 @@
+CAMI NAILS — ENVIAR O CÓDIGO AO GITHUB
+
+1. PREPARAR
+Tenha uma conta em https://github.com e instale Git para Windows pelo site https://git-scm.com/downloads . Abra um novo PowerShell após a instalação.
+Use de preferência uma cópia limpa deste pacote, extraída separadamente da pasta usada pelo Studio. Não envie o ZIP como único arquivo: publique os arquivos extraídos para permitir consulta do código.
+
+2. CRIAR O REPOSITÓRIO
+No GitHub, clique em + > New repository.
+Nome sugerido: cami-nails-studio.
+Descrição sugerida: Sistema local de gestão de clientes, agenda e receitas para o Studio Cami Nails — projeto extensionista.
+Escolha a visibilidade conforme a exigência da disciplina. Público permite consulta por link; privado exige conceder acesso ao avaliador.
+Não marque criação de README, .gitignore ou licença: o projeto já inclui README e .gitignore. Clique Create repository e copie a URL HTTPS.
+
+3. ABRIR O TERMINAL
+Abra o PowerShell na pasta cami-nails-local, onde estão README.md, .gitignore e run.py. Para abrir, entre na pasta pelo Explorador, digite powershell na barra de endereço e pressione Enter.
+Confira a instalação:
+git --version
+
+4. PREPARAR O HISTÓRICO
+Execute uma linha por vez:
+git init
+git branch -M main
+git config user.name "SEU NOME"
+git config user.email "SEU EMAIL DO GITHUB"
+git add .
+git status
+
+Troque os textos em maiúsculas pelos seus dados. Você pode usar o e-mail noreply exibido nas configurações do GitHub para não expor seu e-mail pessoal nos commits.
+
+5. CONFERIR ANTES DE PUBLICAR
+Na lista do git status NÃO devem aparecer instance, backups, .venv, senhas, bancos, logs ou dados pessoais. O .gitignore já foi preparado. Para conferir especificamente:
+git ls-files
+
+Se encontrar arquivos privados, pare antes do commit. O .gitignore não remove arquivos que já estavam rastreados em um repositório antigo. Este guia pressupõe um repositório novo, a partir do pacote limpo.
+
+6. SALVAR E ENVIAR
+Execute:
+git commit -m "Versão inicial do sistema Cami Nails"
+git remote add origin https://github.com/SEU-USUARIO/cami-nails-studio.git
+git push -u origin main
+
+Substitua a URL pela copiada no passo 2. Conclua a autenticação do Git quando solicitada; no Windows, o gerenciador de credenciais pode abrir o navegador. Não coloque senha ou token nos arquivos do projeto. A senha comum da conta GitHub não serve como senha de autenticação Git por HTTPS.
+
+7. CONFERIR A ENTREGA
+Abra o repositório no navegador e confira README, app, docs e tests. Copie o endereço do repositório, por exemplo https://github.com/SEU-USUARIO/cami-nails-studio , para o campo de link do código na documentação acadêmica. Teste o acesso com uma janela anônima se ele for público.
+O link do repositório permite consultar o código; não é um link de acesso ao sistema em execução.
+
+8. ATUALIZAÇÕES POSTERIORES
+Na mesma pasta:
+git add .
+git status
+git commit -m "Descrição da melhoria realizada"
+git push
+Sempre revise os arquivos antes de publicar.
+
+Referência oficial consultada:
+https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github

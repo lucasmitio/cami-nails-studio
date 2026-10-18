@@ -1,0 +1,1 @@
+document.querySelectorAll('input[name="telefone"]').forEach(input=>{const format=()=>{let n=input.value.replace(/\D/g,'');if((n.length===12||n.length===13)&&n.startsWith('55'))n=n.slice(2);n=n.slice(0,11);input.value=n.length>6?`(${n.slice(0,2)}) ${n.slice(2,-4)}-${n.slice(-4)}`:n.length>2?`(${n.slice(0,2)}) ${n.slice(2)}`:n;};input.addEventListener('blur',format);});

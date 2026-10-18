@@ -1,0 +1,56 @@
+CAMI NAILS — TUTORIAL DE USO
+
+1. PREPARAR O SISTEMA
+Instale Python 3.11 ou superior. Extraia a pasta cami-nails-local para um local permanente. Dê dois cliques em instalar_atalho.bat e aguarde. É necessária internet nesta preparação. Na primeira instalação será solicitado e-mail e senha da administradora. A senha deve ter pelo menos 12 caracteres; ela não aparece enquanto é digitada. Não existe senha padrão.
+Se já usa o sistema: feche o servidor, faça uma cópia da pasta, substitua os arquivos do programa e preserve instance e .venv. Execute instalar_atalho.bat novamente. Não precisa criar a conta outra vez.
+
+2. ZERAR OS DADOS DE TESTE ANTES DO USO REAL
+Encerre o sistema pela janela Cami Nails e feche qualquer servidor antigo no terminal. Execute zerar_dados_teste.bat. Informe seu e-mail e senha atuais e digite ZERAR.
+O procedimento cria e verifica um backup antes de apagar clientes, agendamentos, receitas, históricos de mensagens, registros de utilização e tentativas de login. Preserva a conta, os serviços e os modelos de mensagens para evitar refazer a configuração. Não executa se a porta do servidor estiver em uso.
+O backup fica em backups/antes-limpeza-....sqlite3. A limpeza só é feita no computador em que você executa o arquivo. O pacote distribuído não contém banco nem dados de clientes.
+Não use este comando na rotina: ele é destinado à retirada dos testes antes da entrada em operação.
+
+3. ABRIR E ENCERRAR
+Dê dois cliques no ícone Cami Nails na Área de Trabalho. O navegador abrirá automaticamente. Faça login. A janela pequena pode ser minimizada, mas deve permanecer aberta durante o uso. Fechar somente o navegador não encerra o servidor. Ao terminar, salve os formulários e clique Encerrar sistema na janela pequena.
+
+4. ADMINISTRAÇÃO — E-MAIL E SENHA
+Entre no menu Administração. Informe o e-mail desejado, sua senha atual e, se desejar trocar a senha, a nova senha e a confirmação. Para mudar apenas o e-mail, deixe os campos de nova senha vazios. Ao salvar, todas as sessões antigas são encerradas; entre novamente. As senhas são armazenadas como hash, nunca como texto aberto.
+Guarde o acesso em local seguro. Não há recuperação por e-mail nesta versão.
+
+5. CLIENTES
+Clique Nova cliente. Preencha nome, WhatsApp com DDD e, se necessário, nascimento, Instagram, endereço e preferências. O telefone é formatado ao sair do campo. Cada telefone só pode pertencer a um cadastro; busque também entre clientes inativas antes de cadastrar novamente.
+Use Inativar em vez de apagar para preservar histórico.
+
+6. SERVIÇOS
+Revise preço, duração e intervalo sugerido. Os quatro serviços iniciais são: Alongamento Molde F1 R$100, Manutenção R$80, Banho de Gel R$70 e Blindagem R$60. Durações e manutenção são sugestões que devem ser ajustadas com Camila. Alterar o catálogo não altera o preço dos agendamentos já registrados.
+
+7. AGENDA
+Clique Criar agendamento ou clique em um horário livre. Selecione cliente, serviço, data, hora e situação. O sistema impede sobreposição. Use Dia, Semana, Mês e Ano para navegar.
+Agendado: reservado. Confirmado: presença confirmada. Concluído: serviço realizado, com receita automática. Cancelado e Não compareceu: não geram receita.
+Para corrigir, clique no atendimento e salve as alterações. Não há arrastar e soltar nesta versão.
+
+8. RECEITAS E DASHBOARD
+Ao concluir, o valor combinado entra automaticamente nas receitas pela data do atendimento. Não precisa lançar pagamento, despesa ou forma de recebimento. Salvar novamente não duplica. Reabrir ou cancelar o atendimento o retira das receitas.
+Receita prevista é a soma dos agendados e confirmados. Não significa valor já recebido. Use os filtros por semana, mês ou ano; os gráficos e listas acompanham a seleção. Clientes ativas hoje e Agenda de hoje são indicadores atuais, identificados separadamente.
+
+9. MENSAGENS
+Crie um modelo em Mensagens. Variáveis disponíveis: {nome}, {data}, {hora}, {servico}, {manutencao}.
+Selecione um agendamento disponível e um modelo. Clique Preparar mensagem, revise o texto e o número e use Abrir WhatsApp. Pressione Enviar dentro do WhatsApp. Não há envio automático ou antecedência em horas. A lista considera agendamentos Agendados ou Confirmados de hoje em diante. Histórico de abertura não comprova envio.
+
+10. BACKUP
+Execute fazer_backup.bat regularmente e copie o arquivo para outro dispositivo protegido. O arquivo inclui dados pessoais e credenciais protegidas por hash. Nunca publique um backup no GitHub.
+Para restaurar: feche o sistema e execute no terminal da pasta:
+.venv\Scripts\python backup.py --restaurar "CAMINHO-DO-BACKUP.sqlite3" --confirmar-servidor-fechado
+O banco atual é copiado antes da restauração. O login volta a ser o da data do backup. Não restaure enquanto o sistema estiver aberto.
+
+11. PROBLEMAS COMUNS
+Tela antiga após atualização: pressione Ctrl+F5.
+Porta 5000 ocupada: feche o servidor anterior ou a outra janela controladora.
+Erro ao iniciar: consulte instance/inicializacao.log. Não publique esse log.
+Sem botão de WhatsApp: selecione agendamento e modelo e clique Preparar mensagem.
+Receita zerada: confira se o agendamento está Concluído e dentro do período filtrado.
+Não mova a pasta após instalar o atalho. O atalho aponta para essa localização.
+
+12. GITHUB E ENTREGA
+Siga docs/GITHUB_PASSO_A_PASSO.txt. Publique apenas código e documentos. O .gitignore exclui instance, backups, .venv e arquivos privados. Revise a lista antes de enviar.
+Para vídeos e imagens acadêmicas, utilize cadastros fictícios. Registre feedback e resultados reais somente após a validação com o Studio.

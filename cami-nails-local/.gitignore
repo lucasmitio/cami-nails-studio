@@ -1,0 +1,22 @@
+# Dados privados, ambientes e arquivos gerados
+instance/
+backups/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.sqlite*
+*.db
+*.db-*
+*.key
+*.log
+.env
+.env.*
+!.env.example
+*.zip
+*.lnk
+.pytest_cache/
+.coverage
+htmlcov/
+.DS_Store
+Thumbs.db
